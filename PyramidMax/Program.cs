@@ -23,6 +23,7 @@ public class Program
         return pyramid;
     }
 
+
     private static bool IsNumberPrime(int number)
     {
         int i;
@@ -64,14 +65,53 @@ public class Program
     private static int CalculateDiagonalNonPrimeNumbers(int[,] Pyramidarray2D)
     {
         int quantityOfRows = Pyramidarray2D.GetLength(0);
+        for(int z = quantityOfRows - 1; z >= 0; z--)
+        {
+            if (IsNumberPrime(Pyramidarray2D[quantityOfRows - 1, z]))
+            {
+                Pyramidarray2D[quantityOfRows - 1, z] = 0;
+            }
+        }
+        
+
         for (int i = quantityOfRows - 2; i >= 0; i--)
         {
             for (int j = quantityOfRows - 2; j >= 0; j--)
             {
+
+
+         
+
                 if (IsNumberPrime(Pyramidarray2D[i, j]) == false)
                 {
+
+
+
+
                     Pyramidarray2D[i, j] += Math.Max(Pyramidarray2D[i + 1, j], Pyramidarray2D[i + 1, j + 1]);
+
                 }
+                else
+                {
+                    Pyramidarray2D[i, j] = 0;
+                }
+                int rowLength = Pyramidarray2D.GetLength(0);
+                int colLength = Pyramidarray2D.GetLength(1);
+
+                for (int a = 0; a < rowLength; a++)
+                {
+                    for (int b = 0; b < colLength; b++)
+                    {
+                        Console.Write(string.Format("{0} ", Pyramidarray2D[a, b]));
+                    }
+
+
+
+
+
+                    Console.Write(Environment.NewLine + Environment.NewLine);
+                }
+               
             }
         }
 
